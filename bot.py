@@ -48,4 +48,4 @@ async def 중지(ctx):
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
-```
+
