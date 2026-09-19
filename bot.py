@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.command()
 async def 반복(ctx, 횟수: int, *, 내용: str):
     # 최대 10회
-    횟수 = min(max(횟수, 1), 10)
+    횟수 = min(max(횟수, 1), 999999999)
 
     # 이미 반복 중이면 새 작업을 시작하지 않음
     if ctx.channel.id in 반복_작업:
