@@ -1,4 +1,3 @@
-
 import os
 import asyncio
 import discord
@@ -11,13 +10,16 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 반복_작업 = {}
 
+허용_사용자_ID = 1497192035705290793
+
 
 @bot.command()
 async def 반복(ctx, 횟수: int, *, 내용: str):
-    # 최대 999999999회
-    횟수 = min(max(횟수, 1), 999999999)
+    if ctx.author.id != 허용_사용자_ID:
+        return
 
-    # 이미 반복 중이면 새 작업을 시작하지 않음
+    횟수 = min(max(횟수, 1), 999999)
+
     if ctx.channel.id in 반복_작업:
         await ctx.send("이미 반복 중이야!")
         return
@@ -26,7 +28,7 @@ async def 반복(ctx, 횟수: int, *, 내용: str):
         try:
             for _ in range(횟수):
                 await ctx.send(내용)
-                await asyncio.sleep(0.7)
+                await asyncio.sleep(0.5)
         except asyncio.CancelledError:
             pass
         finally:
@@ -37,6 +39,9 @@ async def 반복(ctx, 횟수: int, *, 내용: str):
 
 @bot.command()
 async def 중지(ctx):
+    if ctx.author.id != 허용_사용자_ID:
+        return
+
     작업 = 반복_작업.get(ctx.channel.id)
 
     if 작업 is None:
@@ -48,4 +53,3 @@ async def 중지(ctx):
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
-
