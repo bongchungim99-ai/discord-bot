@@ -26,7 +26,7 @@ async def 반복(ctx, 횟수: int, *, 내용: str):
         try:
             for _ in range(횟수):
                 await ctx.send(내용)
-                await asyncio.sleep(2)
+                await asyncio.sleep(0.7)
         except asyncio.CancelledError:
             pass
         finally:
