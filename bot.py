@@ -18,7 +18,7 @@ async def 반복(ctx, 횟수: int, *, 내용: str):
     if ctx.author.id != 허용_사용자_ID:
         return
 
-    횟수 = min(max(횟수, 1), 999999)
+    횟수 = min(max(횟수, 1), 9999999999)
 
     if ctx.channel.id in 반복_작업:
         await ctx.send("이미 반복 중이야!")
@@ -28,7 +28,7 @@ async def 반복(ctx, 횟수: int, *, 내용: str):
         try:
             for _ in range(횟수):
                 await ctx.send(내용)
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(0.03)
         except asyncio.CancelledError:
             pass
         finally:
